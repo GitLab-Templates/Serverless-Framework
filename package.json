@@ -1,0 +1,22 @@
+{
+  "name": "gitlab-serverless-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "serverless": "^1.50.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/nicholasklick/gitlab-serverless-framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/nicholasklick/gitlab-serverless-framework/issues"
+  },
+  "homepage": "https://gitlab.com/nicholasklick/gitlab-serverless-framework#readme"
+}
