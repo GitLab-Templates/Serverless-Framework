@@ -9,7 +9,7 @@ An example project of deploying a AWS Lambda function + API Gateway using Server
 ```
 npm install
 ```
-1. Deploy
+2. Deploy
 ```
 serverless deploy --stage staging
 ```
