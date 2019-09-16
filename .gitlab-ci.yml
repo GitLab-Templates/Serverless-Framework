@@ -1,26 +1,13 @@
 image: node:latest
 
-variables:
-  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-
 stages:
-  - build
   - deploy
 
-build:
-  stage: build
-  script:
-    - npm install -g serverless
-
-staging:
+production:
   stage: deploy
   before_script:
     - npm config set prefix /usr/local
     - npm install -g serverless
   script:
-    - serverless deploy --stage staging --verbose
-  only:
-    - master
-    - tags
-  environment: staging
+    - serverless deploy --stage production --verbose
+  environment: production
