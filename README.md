@@ -45,6 +45,43 @@ The frontend should be available at `http://localhost:8080`
 npm test
 ```
 
+#### Unit Tests
+
+For the serverless backend, unit tests live with the src files as `srcFile.test.js`. The unit tests use the serverless jest plugin and lambda wrapper to simulate events to the functions and validate their outputs.
+
+#### Integration Tests
+
+Integration tests live in the folder `integrationTests`. Those tests allow us to spin up serverless offline as a service and make requests against it and validate the results of those requests.
+
+A typical integration test will look something like:
+
+```javascript
+// This helper provides access to the serverless process and an axios instance
+// to make requests against the running service.
+const { serverlessProcess, serverlessService } = require('./helper.js')
+
+describe('some_function', () => {
+    beforeAll(async () => {
+        // serverlessProcess.start starts serverless offline in a child process
+        await serverlessProcess.start()
+    })
+
+    afterAll(() => {
+        // serverlessProcess.stop kills the child process at the end of the test
+        serverlessProcess.stop()
+    })
+
+    it('responds to a request', async () => {
+        // The axios instance has the base url and port already, so you just have
+        // to provide a route and any paramters or headers. See the axios project
+        // for details.
+        let response = await serverlessService.get('/some_route?param=here')
+
+        expect(response.data.info).toEqual('amazing')
+    })
+});
+```
+
 ## Additional information
 
 ### Getting the Endpoint URL
