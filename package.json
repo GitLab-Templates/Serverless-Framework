@@ -9,12 +9,29 @@
     "serverless-stack-output": "^0.2.3"
   },
   "devDependencies": {
-    "http-server": "^0.11.1"
+    "axios": "^0.19.0",
+    "http-server": "^0.11.1",
+    "wait-on": "^3.3.0"
   },
   "scripts": {
     "test": "jest",
     "deploy": "serverless deploy",
-    "start": "serverless offline", 
+    "start": "serverless offline",
     "pages": "http-server"
-  }
+  },
+  "jest": {
+    "testMatch": [
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/m_frankiewicz/aws-serverless-framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/m_frankiewicz/aws-serverless-framework/issues"
+  },
+  "homepage": "https://gitlab.com/m_frankiewicz/aws-serverless-framework#readme"
 }
