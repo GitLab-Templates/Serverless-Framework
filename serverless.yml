@@ -2,10 +2,18 @@ service: gitlab-example
 provider:
   name: aws
   runtime: nodejs10.x
+plugins:
+  - serverless-offline
+  - serverless-jest-plugin
+  - serverless-stack-output # Allows us to output endpoint url to json file
 
 functions:
   hello:
     handler: src/handler.hello
     events:
       - http: GET hello
-      
+
+custom:
+  output:
+    handler: src/handler.hello
+    file: stack.json

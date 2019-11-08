@@ -1,11 +1,53 @@
-# gitlab-serverless-framework
 
-An example project of deploying a AWS Lambda function + API Gateway using Serverless Framework and gitlab-ci
+# Serverless Framework with JavaScript
 
-### Quickstart
+---
 
-1. Clone this repo.
-1. Setup your own project on GitLab project and make sure the git remote origin url is set correctly.
-1. In the new GitLab project, set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables in the GitLab CI/CD settings. `Settings > CI/CD > Variables`.  
-1. `git push` to your new GitLab project.
-1. The API Gateway url should be viewable in the build stage logs.
+Example project using the [Serverless Framework](https://serverless.com), JavaScript, AWS Lambda, AWS API Gateway and GitLab Pages.
+
+---
+
+## Deployment
+
+### Setting Up AWS
+
+1. Create AWS credentials including the following IAM policies: `AWSLambdaFullAccess`, `AmazonAPIGatewayAdministrator` and `AWSCloudFormationFullAccess`.
+1. Set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables in the GitLab CI/CD settings. `Settings > CI/CD > Variables`.  
+
+## Development
+
+### Running Locally
+
+Install dependencies with:
+
+```
+npm install
+```
+
+Run backend server with:
+
+```
+npm start
+```
+
+This runs the serverless function locally using `serverless-offline` plugin.
+
+Run frontend with:
+
+``` 
+npm run pages
+```
+
+The frontend should be available at `http://localhost:8080`
+
+### Running Tests
+```
+npm test
+```
+
+## Additional information
+
+### Getting the Endpoint URL
+
+This project is setup with the `serverless-stack-output plugin` which is configured to output a JSON file to `./stack.json`. See [this github repo](https://github.com/sbstjn/serverless-stack-output) for more details.
+

@@ -1,13 +1,48 @@
 image: node:latest
 
 stages:
+  - test
   - deploy
+  - pages_deploy
+
+.ensure_aws_credentials:
+  before_script:
+    - if [ "$AWS_SECRET_ACCESS_KEY" = "" ] || [ "$AWS_ACCESS_KEY_ID" = "" ]
+    - then
+    - echo "Must define \$AWS_ACCESS_KEY_ID and \$AWS_SECRET_ACCESS_KEY. Add keys to $CI_PROJECT_URL/-/settings/ci_cd"
+    - exit 1
+    - fi
+
+test:
+  stage: test
+  before_script:
+    - npm install
+  script:
+    - npm test
 
 production:
   stage: deploy
   before_script:
-    - npm config set prefix /usr/local
-    - npm install -g serverless
+    - npm install
   script:
-    - serverless deploy --stage production --verbose
+    - npm run deploy -- --stage production --verbose
   environment: production
+  only: 
+    - master
+  artifacts:
+    paths:
+      - stack.json
+    expire_in: 2 weeks
+
+pages:
+  stage: pages_deploy
+  extends:
+    - .ensure_aws_credentials
+  script:
+    - cp stack.json ./public/stack.json
+  environment: production_pages
+  only:
+    - master
+  artifacts:
+    paths:
+      - ./public/
