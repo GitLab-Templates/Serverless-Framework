@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GitLab serverless example</title>
+    </head>
+    <body>
+        <p>Click on the link to run your function</p>
+        <a id="function" href="">run function</a>
+        <script>
+            fetch('./stack.json').then((response) => {
+                response.json().then((myJson) => {
+                    document.getElementById("function").href = myJson.ServiceEndpoint + "/hello"
+                })
+            });
+        </script>
+    </body>
+</html>
+
