@@ -2,8 +2,9 @@ image: node:latest
 
 stages:
   - test
-  - deploy
-  - pages_deploy
+  - deploy_function
+  - test_deployed_function
+  - deploy_pages
 
 test:
   stage: test
@@ -12,7 +13,7 @@ test:
     - npm test
 
 production:
-  stage: deploy
+  stage: deploy_function
   before_script:
     - FAILURE_MESSAGE="Must define \$AWS_ACCESS_KEY_ID and \$AWS_SECRET_ACCESS_KEY. Add keys to $CI_PROJECT_URL/-/settings/ci_cd"
     - test -z "$AWS_SECRET_ACCESS_KEY" && echo $FAILURE_MESSAGE && exit 1
@@ -28,8 +29,14 @@ production:
       - stack.json
     expire_in: 2 weeks
 
+postdeploy_test:
+  stage: test_deployed_function
+  script:
+    - npm install
+    - STACK_JSON_FILE=./stack.json npm test featureTests
+
 pages:
-  stage: pages_deploy
+  stage: deploy_pages
   script:
     - cp stack.json ./public/stack.json
   environment: production_pages
