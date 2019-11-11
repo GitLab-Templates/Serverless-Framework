@@ -2,6 +2,9 @@ service: gitlab-example
 provider:
   name: aws
   runtime: nodejs10.x
+  environment:
+    A_VARIABLE: $(env:A_VARIABLE)
+
 plugins:
   - serverless-offline
   - serverless-jest-plugin
