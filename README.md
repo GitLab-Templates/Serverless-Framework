@@ -19,7 +19,7 @@ provider:
   environment:
     A_VARIABLE: $(env:A_VARIABLE)
 ```
-to your serverless.yml, and then you can add `A_VARIABLE` to your gitlab ci variabls and it will get picked up and deployed with your function.
+to your serverless.yml, and then you can add `A_VARIABLE` to your GitLab Ci variables and it will get picked up and deployed with your function.
 
 For local development, you can add them to a `.env` file, see `.env.example` for an example of this.
 
