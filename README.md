@@ -9,6 +9,20 @@ Example project using the [Serverless Framework](https://serverless.com), JavaSc
 
 ## Deployment
 
+### Secrets
+
+Secrets are injected into your functions using environment variables. By defining variables in the provider section of the serverless.yml you add them to the environment of the deployed function. From there, you can reference them in your functions as well.
+
+So you would add something like:
+```
+provider:
+  environment:
+    A_VARIABLE: $(env:A_VARIABLE)
+```
+to your serverless.yml, and then you can add `A_VARIABLE` to your GitLab Ci variables and it will get picked up and deployed with your function.
+
+For local development, you can add them to a `.env` file, see `.env.example` for an example of this.
+
 ### Setting Up AWS
 
 1. Create AWS credentials including the following IAM policies: `AWSLambdaFullAccess`, `AmazonAPIGatewayAdministrator` and `AWSCloudFormationFullAccess`.
