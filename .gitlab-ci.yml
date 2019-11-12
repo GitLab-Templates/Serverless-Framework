@@ -1,5 +1,8 @@
 image: node:latest
 
+variables:
+  AWS_REGION: us-east-1
+
 stages:
   - test
   - deploy_function
