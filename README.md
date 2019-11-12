@@ -12,7 +12,11 @@ Example project using the [Serverless Framework](https://serverless.com), JavaSc
 ### Setting Up AWS
 
 1. Create AWS credentials including the following IAM policies: `AWSLambdaFullAccess`, `AmazonAPIGatewayAdministrator` and `AWSCloudFormationFullAccess`.
-1. Set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables in the GitLab CI/CD settings. `Settings > CI/CD > Variables`.  
+1. Set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables in the GitLab CI/CD settings. `Settings > CI/CD > Variables`.
+
+### Accessing Page
+
+To view your page go to `Settings > Pages` and click on the given link.
 
 ## Development
 
