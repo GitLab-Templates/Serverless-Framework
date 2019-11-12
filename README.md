@@ -14,14 +14,14 @@ Example project using the [Serverless Framework](https://serverless.com), JavaSc
 Secrets are injected into your functions using environment variables. By defining variables in the provider section of the serverless.yml you add them to the environment of the deployed function. From there, you can reference them in your functions as well.
 
 So you would add something like:
-```
+```yml
 provider:
   environment:
     A_VARIABLE: $(env:A_VARIABLE)
 ```
 to your serverless.yml, and then you can add `A_VARIABLE` to your GitLab Ci variables and it will get picked up and deployed with your function.
 
-For local development, you can add them to a `.env` file, see `.env.example` for an example of this.
+For local development, we suggest installing something like [dotenv](https://www.npmjs.com/package/dotenv) to manage environment variables.
 
 ### Setting Up AWS
 
@@ -38,13 +38,13 @@ To view your page go to `Settings > Pages` and click on the given link.
 
 Install dependencies with:
 
-```
+```sh
 npm install
 ```
 
 Run backend server with:
 
-```
+```sh
 npm start
 ```
 
@@ -52,14 +52,14 @@ This runs the serverless function locally using `serverless-offline` plugin.
 
 Run frontend with:
 
-``` 
+```sh
 npm run pages
 ```
 
 The frontend should be available at `http://localhost:8080`
 
 ### Running Tests
-```
+```sh
 npm test
 ```
 
