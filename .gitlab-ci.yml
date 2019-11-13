@@ -34,6 +34,8 @@ production:
 
 postdeploy_test:
   stage: test_deployed_function
+  only:
+    - master
   script:
     - npm install
     - STACK_JSON_FILE=./stack.json npm test featureTests
