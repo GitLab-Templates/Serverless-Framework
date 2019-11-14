@@ -71,7 +71,7 @@ For the serverless backend, unit tests live with the src files as `srcFile.test.
 
 Feature tests live in the folder `featureTests`. Those tests allow us to spin up serverless offline as a service and make requests against it and validate the results of those requests.
 
-Feature test double as post deploy tests when the env variable `STACK_JSON_FILE` is specified with the path to the file generated on deployment (`stack.json`), see in `gitlab-ci.yml`.
+Feature tests double as post deploy tests when the environment variable `STACK_JSON_FILE` is specified with the path to the file generated on deployment (`stack.json`), see in `gitlab-ci.yml`.
 
 A typical feature test will look something like:
 

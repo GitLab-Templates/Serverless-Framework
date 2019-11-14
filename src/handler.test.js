@@ -21,6 +21,5 @@ describe('hello', () => {
     return wrapped.run({}).then((response) => {
       expect(JSON.parse(response.body).secret).toEqual("Test")
     })
-    process.env.A_VARIABLE = originalEnv
   })
 });
