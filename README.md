@@ -11,15 +11,15 @@ Example project using the [Serverless Framework](https://serverless.com), JavaSc
 
 ### Secrets
 
-Secrets are injected into your functions using environment variables. By defining variables in the provider section of the serverless.yml you add them to the environment of the deployed function. From there, you can reference them in your functions as well.
+Secrets are injected into your functions using environment variables. By defining variables in the provider section of the `serverless.yml` you add them to the environment of the deployed function. From there, you can reference them in your functions as well.
 
 So you would add something like:
 ```yml
 provider:
   environment:
-    A_VARIABLE: $(env:A_VARIABLE)
+    A_VARIABLE: ${env:A_VARIABLE}
 ```
-to your serverless.yml, and then you can add `A_VARIABLE` to your GitLab Ci variables and it will get picked up and deployed with your function.
+to your `serverless.yml`, and then you can add `A_VARIABLE` to your GitLab Ci variables and it will get picked up and deployed with your function.
 
 For local development, we suggest installing something like [dotenv](https://www.npmjs.com/package/dotenv) to manage environment variables.
 
@@ -65,13 +65,15 @@ npm test
 
 #### Unit Tests
 
-For the serverless backend, unit tests live with the src files as `srcFile.test.js`. The unit tests use the serverless jest plugin and lambda wrapper to simulate events to the functions and validate their outputs.
+For the serverless backend, unit tests live with the src files as `srcFile.test.js`. The unit tests use the `serverless-jest-plugin` and lambda wrapper to simulate events to the functions and validate their outputs.
 
-#### Integration Tests
+#### Feature Tests
 
-Integration tests live in the folder `integrationTests`. Those tests allow us to spin up serverless offline as a service and make requests against it and validate the results of those requests.
+Feature tests live in the folder `featureTests`. Those tests allow us to spin up serverless offline as a service and make requests against it and validate the results of those requests.
 
-A typical integration test will look something like:
+Feature test double as post deploy tests when the env variable `STACK_JSON_FILE` is specified with the path to the file generated on deployment (`stack.json`), see in `gitlab-ci.yml`.
+
+A typical feature test will look something like:
 
 ```javascript
 // This helper provides access to the serverless process and an axios instance

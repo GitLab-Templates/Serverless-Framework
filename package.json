@@ -23,15 +23,5 @@
     "testMatch": [
       "**/?(*.)+(spec|test).[jt]s?(x)"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/m_frankiewicz/aws-serverless-framework.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/m_frankiewicz/aws-serverless-framework/issues"
-  },
-  "homepage": "https://gitlab.com/m_frankiewicz/aws-serverless-framework#readme"
+  }
 }
