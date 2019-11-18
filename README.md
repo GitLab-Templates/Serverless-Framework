@@ -106,5 +106,39 @@ describe('some_function', () => {
 
 ### Getting the Endpoint URL
 
-This project is setup with the `serverless-stack-output plugin` which is configured to output a JSON file to `./stack.json`. See [this github repo](https://github.com/sbstjn/serverless-stack-output) for more details.
+This project is setup with the `serverless-stack-output` plugin which is configured to output a JSON file to `./stack.json`. See [this github repo](https://github.com/sbstjn/serverless-stack-output) for more details.
 
+### Setting up CORS
+
+This project sets up a static website from which the serverless function is called. Therefore the need to deal with the Cross-Origin Resource Sharing (CORS).
+
+The quick way to do that is to add the `cors: true` flag to the HTTP endpoint in `serverless.yml`:
+
+```yaml
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+          cors: true
+```
+
+Additionally, the CORS headers needs to be returned in the function response:
+
+```javascript
+'use strict';
+
+module.exports.hello = async event => {
+  return {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: // ...
+  };
+};
+```
+
+For more information on setting up CORS see a [blog post](https://serverless.com/blog/cors-api-gateway-survival-guide/) written by the Serverless Framework team.
