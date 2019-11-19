@@ -14,11 +14,13 @@ Example project using the [Serverless Framework](https://serverless.com), JavaSc
 Secrets are injected into your functions using environment variables. By defining variables in the provider section of the `serverless.yml` you add them to the environment of the deployed function. From there, you can reference them in your functions as well.
 
 So you would add something like:
+
 ```yml
 provider:
   environment:
     A_VARIABLE: ${env:A_VARIABLE}
 ```
+
 to your `serverless.yml`, and then you can add `A_VARIABLE` to your GitLab Ci variables and it will get picked up and deployed with your function.
 
 For local development, we suggest installing something like [dotenv](https://www.npmjs.com/package/dotenv) to manage environment variables.
@@ -59,6 +61,7 @@ npm run pages
 The frontend should be available at `http://localhost:8080`
 
 ### Running Tests
+
 ```sh
 npm test
 ```
@@ -106,5 +109,41 @@ describe('some_function', () => {
 
 ### Getting the Endpoint URL
 
-This project is setup with the `serverless-stack-output plugin` which is configured to output a JSON file to `./stack.json`. See [this github repo](https://github.com/sbstjn/serverless-stack-output) for more details.
+This project is setup with the `serverless-stack-output` plugin which is configured to output a JSON file to `./stack.json`. See [this github repo](https://github.com/sbstjn/serverless-stack-output) for more details.
 
+### Setting up CORS
+
+This project sets up a static website from which the serverless function is called. Therefore the function needs to handle Cross-Origin Resource Sharing (CORS).
+
+The quick way to do that is to add the `cors: true` flag to the HTTP endpoint in `serverless.yml`:
+
+```yaml
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+          cors: true
+```
+
+Additionally, the `Access-Control-Allow-Origin` header needs to be returned in the function response:
+
+```javascript
+'use strict';
+
+module.exports.hello = async event => {
+  return {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: // ...
+  };
+};
+```
+
+In case you want to use cookies or other authentication, add `'Access-Control-Allow-Credentials': true` to the headers as well. You will also have to set `Access-Control-Allow-Origin` to a specific origin instead of the wildcard (example: `'Access-Control-Allow-Origin': 'https://myorigin.com'`).
+
+For more information on setting up CORS see a [blog post](https://serverless.com/blog/cors-api-gateway-survival-guide/) written by the Serverless Framework team.
