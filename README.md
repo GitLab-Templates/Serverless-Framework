@@ -110,7 +110,7 @@ This project is setup with the `serverless-stack-output` plugin which is configu
 
 ### Setting up CORS
 
-This project sets up a static website from which the serverless function is called. Therefore the need to deal with the Cross-Origin Resource Sharing (CORS).
+This project sets up a static website from which the serverless function is called. Therefore the function need to handle Cross-Origin Resource Sharing (CORS).
 
 The quick way to do that is to add the `cors: true` flag to the HTTP endpoint in `serverless.yml`:
 
