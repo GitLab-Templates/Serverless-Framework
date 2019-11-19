@@ -125,7 +125,7 @@ functions:
           cors: true
 ```
 
-Additionally, the CORS headers needs to be returned in the function response:
+Additionally, the `Access-Control-Allow-Origin` header needs to be returned in the function response:
 
 ```javascript
 'use strict';
