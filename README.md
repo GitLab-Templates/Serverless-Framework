@@ -144,6 +144,6 @@ module.exports.hello = async event => {
 };
 ```
 
-In case you want to use cookies or other authentication, add `'Access-Control-Allow-Credentials': true` to the headers as well.
+In case you want to use cookies or other authentication, add `'Access-Control-Allow-Credentials': true` to the headers as well. You will also have to set `Access-Control-Allow-Origin` to a specific origin instead of the wildcard (example: `'Access-Control-Allow-Origin': 'https://myorigin.com'`).
 
 For more information on setting up CORS see a [blog post](https://serverless.com/blog/cors-api-gateway-survival-guide/) written by the Serverless Framework team.
