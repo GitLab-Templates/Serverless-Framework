@@ -1,4 +1,4 @@
-service: gitlab-example
+service: gitlab-js-serverless-example
 provider:
   name: aws
   region: ${env:AWS_REGION}
